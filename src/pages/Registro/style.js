@@ -25,6 +25,11 @@ export const StyledRegistro = styled("registro", {
             padding: "20px",
         },
 
+        "required:after" :{
+            content: " *",
+            color: "red"
+        },
+
         h2: {
             color: "black",
             fontSize: "24px",
