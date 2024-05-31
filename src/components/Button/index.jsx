@@ -2,16 +2,12 @@ import React from "react";
 import { StyledButton } from './styles';
 import { Link } from 'react-router-dom';
 
-export default function Button() {
+const Button = ({Text, onClick, Type = "button"}) => {
   return (
-    <StyledButton>
-      <nav className="NavBar">
-        <ul className="NavBarItem">
-          <li className="NavItens"><Link to="/">Home</Link></li>
-          <li className="NavItens"><Link to="/Login">Contato</Link></li>
-          <li className="NavItens"><Link to="/Mapa">Mapa</Link></li>
-        </ul>
-      </nav>
+    <StyledButton type={Type} onClick={onClick}>
+      {Text}
     </StyledButton>
-  );
-}
+  )
+} 
+
+export default Button

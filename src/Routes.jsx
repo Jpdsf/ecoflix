@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route, Link } from "react-router-dom"
 import Home from "./pages/Home"
 import Login from "./pages/Login"
 import Registro from "./pages/Registro"
+import Usuario from "./pages/Usuario" 
 import useAuth from "./hooks/useAuth.jsx";
 
 
@@ -19,6 +20,7 @@ export default function AppRoutes() {
             <Fragment>
                 <Routes>
                     <Route exact path="/" element={<Private Item={Home} />} />
+                    <Route exact path="/Usuario" element={<Private Item={Usuario} />} />
                     <Route path="/Login" element={<Login />} />
                     <Route exact path="/Registro" element={<Registro />} />
                     <Route path="*" element={<Login />} />

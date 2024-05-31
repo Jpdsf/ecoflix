@@ -3,7 +3,7 @@ import { createContext, useEffect, useState } from "react";
 export const AuthContext = createContext({});
 
 export const AuthProvider = ({ children }) => {
-  const [user, setUser] = useState();
+  const [user, setUser] = useState(null);
 
   useEffect(() => {
     const userToken = localStorage.getItem("user_token");
@@ -14,7 +14,7 @@ export const AuthProvider = ({ children }) => {
         (user) => user.email === JSON.parse(userToken).email
       );
 
-      if (hasUser) setUser(hasUser[0]);
+      if (hasUser.length > 0) setUser(hasUser[0]);
     }
   }, []);
 
@@ -27,7 +27,7 @@ export const AuthProvider = ({ children }) => {
       if (hasUser[0].email === email && hasUser[0].password === password) {
         const token = Math.random().toString(36).substring(2);
         localStorage.setItem("user_token", JSON.stringify({ email, token }));
-        setUser({ email, password });
+        setUser(hasUser[0]);
         return;
       } else {
         return "E-mail ou senha incorretos";
@@ -37,8 +37,8 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
-  const registro = (email, password) => {
-    const usersStorage = JSON.parse(localStorage.getItem("users_bd"));
+  const registro = (email, password, name, location) => {
+    const usersStorage = JSON.parse(localStorage.getItem("users_bd")) || [];
 
     const hasUser = usersStorage?.filter((user) => user.email === email);
 
@@ -46,15 +46,10 @@ export const AuthProvider = ({ children }) => {
       return "Já tem uma conta com esse E-mail";
     }
 
-    let newUser;
+    const newUser = { email, password, name, location };
 
-    if (usersStorage) {
-      newUser = [...usersStorage, { email, password }];
-    } else {
-      newUser = [{ email, password }];
-    }
-
-    localStorage.setItem("users_bd", JSON.stringify(newUser));
+    usersStorage.push(newUser);
+    localStorage.setItem("users_bd", JSON.stringify(usersStorage));
 
     return;
   };
@@ -64,9 +59,27 @@ export const AuthProvider = ({ children }) => {
     localStorage.removeItem("user_token");
   };
 
+  const updateUserInfo = (newInfo) => {
+    const usersStorage = JSON.parse(localStorage.getItem("users_bd"));
+
+    const updatedUsers = usersStorage.map((user) => 
+      user.email === user.email ? { ...user, ...newInfo } : user
+    );
+
+    localStorage.setItem("users_bd", JSON.stringify(updatedUsers));
+
+    if (newInfo.email) {
+      const userToken = JSON.parse(localStorage.getItem("user_token"));
+      const updatedUserToken = { ...userToken, email: newInfo.email };
+      localStorage.setItem("user_token", JSON.stringify(updatedUserToken));
+    }
+
+    setUser((prevUser) => ({ ...prevUser, ...newInfo }));
+  };
+
   return (
     <AuthContext.Provider
-      value={{ user, signed: !!user, login, registro, signout }}
+      value={{ user, signed: !!user, login, registro, signout, updateUserInfo }}
     >
       {children}
     </AuthContext.Provider>

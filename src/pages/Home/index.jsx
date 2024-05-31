@@ -1,27 +1,22 @@
 import React from "react"
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Header from "../../components/Header"
 import { StyledHome } from "./style"
+import Button from "../../components/Button";
+import useAuth from "../../hooks/useAuth";
 
-export default function Home() {
+const Home = () => {
     return (
         <StyledHome>
             <Header />
-            <div>
-                <div>
-                    <h3 className="title">REGISTRE-SE</h3>
-                    <form action="" method="get">
-                        <label htmlFor="">email</label>
-                        <input type="text" />
-                        <br></br>
-                        <label htmlFor="">senha</label>
-                        <input type="password" name="" id="" />
-                        <br></br>
-                        <Link to="/Jp">Clique aq</Link>
-                        <link rel="stylesheet" href="/jp" /><button>Registre-se</button>
-                    </form>
-                </div>
+            <div className="title">
+                <h1>Home</h1>
             </div>
         </StyledHome>
     )
+
 }
+
+
+
+export default Home

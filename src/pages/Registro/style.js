@@ -13,7 +13,7 @@ export const StyledRegistro = styled("registro", {
         flexDirection: "row",
         justifyContent: "center",
         alignItems: "center",
-        backgroundImage: `url(${"https://img.freepik.com/fotos-premium/uma-foto-bonita-um-fundo-bonito-uma-foto-muito-bonita_1028782-9203.jpg"})`, // Adicione a imagem de fundo
+        backgroundImage: `url(${"https://img.freepik.com/fotos-premium/uma-foto-bonita-um-fundo-bonito-uma-foto-muito-bonita_1028782-9203.jpg"})`, 
         backgroundSize: "cover",
 
         ".containerRegistro": {

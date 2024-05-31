@@ -1,6 +1,8 @@
 import React from "react"
 import { Link, useNavigate } from 'react-router-dom';
 import Header from "../../components/Header"
+import Button from "../../components/Button";
+import Input from "../../components/Input";
 import { StyledLogin } from "./style"
 import { useState } from "react";
 import useAuth from "../../hooks/useAuth";
@@ -33,17 +35,16 @@ export default function Login() {
 
     return (
         <StyledLogin>
-            <Header />
                 <div className="container">
                     <div className="containerLogin">
                         <h2 className="login" >Login</h2>
                         
                         <div className="loginItens">
-                            <input type="text" value={email} placeholder="Digite seu email" onChange={(e) => [setEmail(e.target.value), setError("")]} />
-                            <input type="text" value={senha} placeholder="Digite sua senha" onChange={(e) => [setSenha(e.target.value), setError("")]} />
-                            <input type="button" value="Entrar" onClick={handleLogin} />
-                            Não tem conta?<Link to='/Registro'>Registre-se</Link>
+                            <Input type={"email"} placeholder={"Digite seu email"} value={email}  onChange={(e) => [setEmail(e.target.value), setError("")]} />
+                            <Input type="password" value={senha} placeholder="Digite sua senha" onChange={(e) => [setSenha(e.target.value), setError("")]} />
                             {error}
+                            <Button type="button" Text={"Entrar"} onClick={handleLogin} />
+                            Não tem conta?<Link to='/Registro'>Registre-se</Link>
                         </div>
                     </div>
                 </div>
