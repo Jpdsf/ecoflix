@@ -49,7 +49,7 @@ export default function Registro() {
                         <Input type="text" value={nome} onChange={(e) => [setNome(e.target.value), setError("")]} placeholder="Digite seu nome" />
                         <Input type="text" value={localizacao} onChange={(e) => [setLocalizacao(e.target.value), setError("")]} placeholder="Digite sua localização" />
                         <Input type="email" value={email} onChange={(e) => [setEmail(e.target.value), setError("")]} placeholder="Digite seu email" />
-                        <Input type="email" value={emailConfig} onChange={(e) => [setEmailConfig(e.target.value), setError("")]} placeholder="Digite seu email novamente" />
+                        <Input type="email" value={emailConfig} onChange={(e) => [setEmailConfig(e.target.value), setError("")]} placeholder="Confirme seu email" />
                         <Input type="password" value={senha} placeholder="Digite sua senha" onChange={(e) => [setSenha(e.target.value), setError("")]} />
                         <Button onClick={handleSignup} Text={"Registrar"} />
                         <Link to='/Login'>Já tem conta?</Link>
